@@ -45,13 +45,12 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-6 col-xl-2" data-aos="fade-down">
-            <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0"><img src="images/qoobah.png" alt="Image" class="img-fluid w20" style="-webkit-filter: none;"></a></h1>
-          </div>
-          <div class="col-10 col-md-8 d-none d-xl-block" data-aos="fade-down">
             <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
+              <br><br><br>
             </nav>
           </div>
-
+          <div class="col-10 col-md-8 d-none d-xl-block" data-aos="fade-down">
+          </div>
           <div class="col-6 col-xl-2 text-right" data-aos="fade-down">
             <div class="d-none d-xl-inline-block">
               <ul class="site-menu js-clone-nav ml-auto list-unstyled d-flex text-right mb-0" data-class="social">
@@ -74,22 +73,25 @@
           </div>
         </div>
       </div>
+      <center><h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0"><img src="images/logo-qoobah.png" alt="Image" class="img-fluid w20"style="-webkit-filter: none;" height="200" width="200"></a></h1>
+      </center>
+      <div class="row justify-content-center">
+
+        <div class="col-md-7">
+          <div class="row mb-5">
+            <div class="col-12 ">
+              <h2 class="site-section-heading text-center v" style="text-transform:uppercase;color: black">Pulau <?php echo $_GET['island']; ?></h2>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </header>
 
     <div class="site-section"  data-aos="fade">
       <div class="container-fluid">
 
-        <div class="row justify-content-center">
-
-          <div class="col-md-7">
-            <div class="row mb-5">
-              <div class="col-12 ">
-                <h2 class="site-section-heading text-center" style="text-transform:uppercase">Pulau <?php echo $_GET['island']; ?></h2>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        
         <div class="row" id="lightgallery">
           <?php
               require_once('admin/function/pagedresults.php');

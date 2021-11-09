@@ -63,6 +63,10 @@ if (substr($_SERVER['PHP_SELF'], -10, 10) == "index2.php" && $hakUser == 90) {
                             <label>Link</label>
                             <input type="text" name="link" id="link" class="form-control" placeholder="jawa" required>
                         </div>
+                        <div class="form-group">
+                            <label>Img</label>
+                            <input type="file" name="listGambar[]" class="btn btn-default" accept="image/*" >
+                        </div>
 				</div>
 				<div class="modal-footer">
 					<input type="submit" class="btn btn-primary" value="Save" >

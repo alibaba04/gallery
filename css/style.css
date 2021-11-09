@@ -4,7 +4,10 @@ body {
   color: #464141;
   font-weight: 300;
   font-size: 1rem;
-  background: #000; }
+  background: #F2F1EF; }
+.ib {
+  color:black;
+}
 
 ::-moz-selection {
   background: #000;

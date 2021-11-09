@@ -33,33 +33,44 @@
       <div class="container-fluid">
         <div class="row align-items-center">
           <div class="col-6 col-xl-2" data-aos="fade-down">
-            <h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0"><img src="images/qoobah.png" alt="Image" class="img-fluid w20"style="-webkit-filter: none;"></a></h1>
-          </div>
-          <div class="col-10 col-md-8 d-none d-xl-block" data-aos="fade-down">
             <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
               <br><br><br>
             </nav>
+          </div>
+          <div class="col-10 col-md-8 d-none d-xl-block" data-aos="fade-down">
           </div>
           <div class="col-6 col-xl-2 text-right" data-aos="fade-down">
             <div class="d-none d-xl-inline-block">
               <ul class="site-menu js-clone-nav ml-auto list-unstyled d-flex text-right mb-0" data-class="social">
                 <li>
-                  <a href="https://www.facebook.com/qoobah.ofc" class="pl-0 pr-3" target="_blank" rel="noopener noreferrer"><span class="icon-facebook"></span></a>
+                  <a href="https://www.facebook.com/qoobah.ofc" class="pl-0 pr-3 black" target="_blank" rel="noopener noreferrer"><span class="icon-facebook ib"></span></a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/qoobahofficial/" class="pl-3 pr-3" target="_blank" rel="noopener noreferrer"><span class="icon-instagram"></span></a>
+                  <a href="https://www.instagram.com/qoobahofficial/" class="pl-3 pr-3" target="_blank" rel="noopener noreferrer"><span class="icon-instagram ib"></span></a>
                 </li>
                 <li>
-                  <a href="https://www.youtube.com/channel/UCMzLGdh7-e-JxH-G9HTcpug" class="pl-3 pr-3" target="_blank" rel="noopener noreferrer"><span class="icon-youtube-play"></span></a>
+                  <a href="https://www.youtube.com/channel/UCMzLGdh7-e-JxH-G9HTcpug" class="pl-3 pr-3" target="_blank" rel="noopener noreferrer"><span class="icon-youtube-play ib"></span></a>
                 </li>
                 <li>
-                  <a href="http://qoobah.co.id/" class="pl-3 pr-3" target="_blank" rel="noopener noreferrer"><span class="icon-globe"></span></a>
+                  <a href="http://qoobah.co.id/" class="pl-3 pr-3" target="_blank" rel="noopener noreferrer"><span class="icon-globe ib"></span></a>
                 </li>
               </ul>
             </div>
             <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black"><span class="icon-menu h3"></span></a></div>
           </div>
         </div>
+      </div>
+      <center><h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0"><img src="images/logo-qoobah.png" alt="Image" class="img-fluid w20"style="-webkit-filter: none;" height="200" width="200"></a></h1>
+      </center>
+      <div class="row justify-content-center">
+        <div class="col-md-7">
+          <div class="row mb-5">
+            <div class="col-12 ">
+              <h2 class="site-section-heading text-center" style="text-transform:uppercase;color: black">GALERI QOOBAH</h2>
+            </div>
+          </div>
+        </div>
+
       </div>
     </header>
     <div class="container-fluid" data-aos="fade" data-aos-delay="500">
