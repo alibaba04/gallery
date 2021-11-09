@@ -18,7 +18,7 @@ foreach ($Reader as $Key => $Row)
 {
 			// import data excel mulai baris ke-2 (karena ada header pada baris 1)
 	if ($Key < 1) continue;			
-	$query=mysql_query("INSERT INTO gallery (`location`, `title`, `caption`, `img`)  VALUES ('".$Row[5]."', '".$Row[3]."','".$Row[4]."','".$Row[1].".jpg')");
+	$query=mysql_query("INSERT INTO gallery (`location`, `title`, `caption`, `img`)  VALUES ('".$Row[4]."', '".$Row[2]."','".$Row[3]."','".$Row[0].".jpg')");
 	$berhasil++;
 }
 if ($query) {
