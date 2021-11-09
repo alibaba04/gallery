@@ -100,8 +100,8 @@
               $q = "SELECT * from gallery WHERE location like '%".$_GET['island']."%'";
               $rs = new MySQLPagedResultSet($q, 30, $dbLink);
               while ($query_data = $rs->fetchArray()) {
-                echo '<div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 item sh" data-aos="fade" data-src="images/big-images/DJI_0944.jpg" data-sub-html="<h2>'.$query_data['title'].'</h2><p>'.$query_data['caption'].'</p>"><div class="lg-sub-html"><h4>'.$query_data['title'].'</h4></div>
-                <a href="#"><img src="images/DJI_0944.jpg" alt="IMage" class="img-fluid"></a>
+                echo '<div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 item sh" data-aos="fade" data-src="images/admin/uploads/'.$query_data['img'].'" data-sub-html="<h2>'.$query_data['title'].'</h2><p>'.$query_data['caption'].'</p>"><div class="lg-sub-html"><h4>'.$query_data['title'].'</h4></div>
+                <a href="#"><img src="admin/uploads/'.$query_data['img'].'" alt="IMage" class="img-fluid"></a>
                 </div>';
               }
           ?>
