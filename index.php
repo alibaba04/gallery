@@ -4,7 +4,7 @@
   <title>Gallery &mdash; QOOBAH</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="icon" href="img/sikubah.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="images/sikubah.png" sizes="32x32" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="fonts/icomoon/style.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
