@@ -1222,7 +1222,7 @@ a {
   background: #20c997; }
 
 #lightgallery .item {
-  margin-bottom: 30px; }
+  margin-bottom: 0px; }
   #lightgallery .item img {
     /* filter: url(filters.svg#grayscale); Firefox 3.5+ */
     filter: gray;

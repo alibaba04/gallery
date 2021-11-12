@@ -85,8 +85,13 @@
               echo '<div class="col-lg-4"><div class="image-wrap-2">
               <div class="image-info">
               <h2 class="mb-3">'.$query_data['name'].'</h2>
-              <a href="gallery_list.php?island='.$query_data['link'].'" class="btn btn-outline-white py-2 px-4">More Photos</a></div>
-              <img src="images/map.jpg" alt="Image" class="img-fluid" style="-webkit-filter: none;"></div></div>';
+              <a href="gallery_list.php?island='.$query_data['link'].'" class="btn btn-outline-white py-2 px-4">More Photos</a></div>';
+              if ($query_data['img']!='map.jpg') {
+                echo '<img src="admin/uploads/'.$query_data['img'].'" alt="Image" class="img-fluid" style="-webkit-filter: none;" ></div></div>';
+              }else{
+                echo '<img src="images/map.jpg" alt="Image" class="img-fluid" style="-webkit-filter: none;" ></div></div>';
+              }
+              
             }
           ?>
       </div>
@@ -119,7 +124,6 @@
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/swiper.min.js"></script>
   <script src="js/aos.js"></script>
-
   <script src="js/picturefill.min.js"></script>
   <script src="js/lightgallery-all.min.js"></script>
   <script src="js/jquery.mousewheel.min.js"></script>

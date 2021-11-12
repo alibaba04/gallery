@@ -36,6 +36,9 @@ require_once('./function/secureParam.php');
     <link rel="stylesheet" href="dist/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
 </head>
 <?php
@@ -129,6 +132,7 @@ if ((isset($_SESSION["my"]) === false) || (isset($_GET["page"]) === "login_detai
     ?>
     </div>
     <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="dist/js/jquery-ui.min.js"></script>
     <script src="plugins/select2/select2.full.min.js"></script>
     <script src="dist/js/raphael-min.js"></script>

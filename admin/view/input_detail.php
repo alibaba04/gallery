@@ -6,16 +6,13 @@ $curPage = "view/input_detail";
 $hakUser = getUserPrivilege($curPage);
 if (substr($_SERVER['PHP_SELF'], -10, 10) == "index2.php" && $hakUser == 90) {
 //Jika Mode Tambah/Add
-    if ($_POST["txtMode"] == "Add") {
+    
         $folderUpload = "uploads/";
         $nameimg= array();
         $files = $_FILES;
         $jumlahFile = count($files['listGambar']['name']);
-
-        for ($i = 0; $i < $jumlahFile; $i++) {
-            $namaFile = $files['listGambar']['name'][$i];
-            $lokasiTmp = $files['listGambar']['tmp_name'][$i];
-        }
+    if ($files['listGambar']['name'][0] != '') {
+        
         for ($i = 0; $i < $jumlahFile; $i++) {
             $namaFile = $files['listGambar']['name'][$i];
             $lokasiTmp = $files['listGambar']['tmp_name'][$i];
@@ -23,21 +20,42 @@ if (substr($_SERVER['PHP_SELF'], -10, 10) == "index2.php" && $hakUser == 90) {
         # kita tambahkan uniqid() agar nama gambar bersifat unik
             $lokasiBaru = "{$folderUpload}/{$namaFile}";
             if(move_uploaded_file($lokasiTmp, $lokasiBaru)){
-                $pesan = "file moved successfully";
+                $pesan = $jumlahFile."file moved successfully";
             }
             else{
-                $pesan = " STILL DID NOT MOVE";
+                $pesan = $files['listGambar']['name'][0]." STILL DID NOT MOVE";
             }
             if ($namaFile != '') {
                 array_push($nameimg,$namaFile);
             }
         }
+    }
+        
+    if ($_POST["txtMode"] == "Add") {
         $pesan ='';
         $q= "INSERT INTO `pulau`(`name`, `link`, `img`) VALUES ('".$_POST['name']."','".$_POST['link']."','".$namaFile."')";
         if (!mysql_query($q, $dbLink))
             $pesan = 'Error.';
         else $pesan = 'Success.';
 
+    }
+    if ($_POST["txtMode"] == "Edit") {
+        $pesan ='';
+        if ($namaFile =="") {
+            $q= "UPDATE `pulau` SET `name`='".$_POST['name']."',`link`='".$_POST['link']."' WHERE id='".$_POST['id']."'";
+        }else{
+            $q= "UPDATE `pulau` SET `name`='".$_POST['name']."',`link`='".$_POST['link']."',`img`='".$namaFile."' WHERE id='".$_POST['id']."'";
+        }
+        if (!mysql_query($q, $dbLink))
+            $pesan = 'Error.';
+        else $pesan = 'Success.';
+    }
+    if ($_GET["txtMode"] == "Delete") {
+        $pesan ='';
+        $q= "DELETE FROM `pulau` WHERE md5(id)='".$_GET["id"]."'";
+        if (!mysql_query($q, $dbLink))
+            $pesan = 'Error.';
+        else $pesan = 'Success.';
     }
     if (strtoupper(substr($pesan, 0, 5)) == "GAGAL") {
         global $mailSupport;
@@ -54,18 +72,14 @@ if (substr($_SERVER['PHP_SELF'], -10, 10) == "index2.php" && $hakUser == 90) {
             alert("Name must be filled out");
             return false;
         }
-        let x = document.forms["myForm"]["link"].value;
-        if (x == "") {
+        let y = document.forms["myForm"]["link"].value;
+        if (y == "") {
             alert("Link must be filled out");
             return false;
         }
     }
 </script>
 <section class="content-header">
-  <h1>
-    Input Data 
-    <small></small>
-  </h1>
   <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Input</a></li>
     <li class="active">Input</li>
@@ -79,14 +93,29 @@ if (substr($_SERVER['PHP_SELF'], -10, 10) == "index2.php" && $hakUser == 90) {
 				<i class="fa fa-pencil"></i><br><br>
 				<div class="modal-body">
 					<form method="post" action="index2.php?page=view/input_detail" method="post" name="frmSiswaDetail" onsubmit="return validateForm()" autocomplete="off" enctype="multipart/form-data" name="myForm">
-                        <input type='hidden' name='txtMode' value='Add'>
+                        <?php
+                        if (isset($_GET["mode"]) == "Edit") {
+                            $kode = secureParam($_GET["kode"], $dbLink);
+                            $q = "SELECT * FROM pulau WHERE md5(id)='".$kode."'";
+
+                            $rsTemp = mysql_query($q, $dbLink);
+
+                            if ($dataP = mysql_fetch_array($rsTemp)) {
+                                echo "<input type='hidden' name='txtMode' value='Edit'>";
+                            }
+                        }else{
+                            echo "<input type='hidden' name='txtMode' value='Add'>";
+                        }
+
+                        ?>
+                        <input type="hidden" name="id" id="id" class="form-control" value="<?php if(isset($_GET["mode"]) == "Edit") { echo$dataP['id'];}?>" >
 						<div class="form-group">
                             <label>Name</label>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Pulau Jawa" required>
+                            <input type="text" name="name" id="name" class="form-control" placeholder="Pulau Jawa" required value="<?php if(isset($_GET["mode"]) == "Edit") { echo$dataP['name'];}?>">
                         </div>
                         <div class="form-group">
                             <label>Link</label>
-                            <input type="text" name="link" id="link" class="form-control" placeholder="jawa" required>
+                            <input type="text" name="link" id="link" class="form-control" placeholder="jawa" required value="<?php if(isset($_GET["mode"]) == "Edit") { echo$dataP['link'];}?>">
                         </div>
                         <div class="form-group">
                             <label>Img</label>
@@ -100,27 +129,25 @@ if (substr($_SERVER['PHP_SELF'], -10, 10) == "index2.php" && $hakUser == 90) {
 		</div>
 	</section>
     <section class="col-lg-6">
-    <?php 
+        <?php 
         if (isset($_GET["pesan"]) != "") {
             if ($_GET["pesan"] =='Error.') {
                 echo '<div class="callout callout-danger">';
                 echo '<h4><i class="icon fa fa-ban"></i> Alert!</h4>';
             }else{
-                echo '<div class="callout callout-success">';
+                echo '<div class="callout callout-info">';
                 echo '<h4><i class="icon fa fa-check"></i> Alert!</h4>';
             }
             ?>
-                
-                <?php
-
-                    if ($_GET["pesan"] != "") {
-
-                        echo $_GET["pesan"];
-                    }
-                ?>
-            </div>
+            
             <?php
-        }
+            if ($_GET["pesan"] != "") {
+                echo $_GET["pesan"];
+            }
+            ?>
+        </div>
+        <?php
+    }
     ?>
     </section>
     <section class="col-lg-12 connectedSortable">
@@ -139,11 +166,11 @@ if (substr($_SERVER['PHP_SELF'], -10, 10) == "index2.php" && $hakUser == 90) {
                     <table class="table table-bordered table-striped table-hover" >
                         <thead>
                             <tr>
-                                <th width="3%">No</th>
+                                <th width="5%">No</th>
                                 <th style="width: 30%">Pulau</th>
                                 <th style="width: 20%">Link</th>
                                 <th style="width: 20%">img</th>
-                                <th style="width: 20%">Action</th>
+                                <th style="width: 10%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -154,15 +181,12 @@ if (substr($_SERVER['PHP_SELF'], -10, 10) == "index2.php" && $hakUser == 90) {
                                 echo "<td>" . $rowCounter . "</td>";
                                 echo "<td>" . $query_data[1] . "</td>";
                                 echo "<td>" . $query_data[2] . "</td>";
-                                echo "<td>" . $query_data[3] . "</td>";
+                                echo "<td><center><img src='uploads/".$query_data[3]."' class='img-fluid' width='120'height='100'></center></td>";
                                 
                                 if ($hakUser == 90) {
-                                    echo "<td><span class='label label-success' style='cursor:pointer;' onclick=location.href='" . $_SERVER['PHP_SELF'] . "?page=view/setting_detail&mode=edit&kode=" . md5($query_data[0]) . "'><i class='fa fa-edit'></i>&nbsp;Ubah</span></td>";
-                                    
-                                    echo("<td><span class='label label-danger' onclick=\"if(confirm('Apakah anda yakin akan menghapus data Setting " . $query_data[1] . " ?')){location.href='index2.php?page=" . $curPage . "&txtMode=Delete&kodeSetting=" . md5($query_data[0]) . "'}\" style='cursor:pointer;'><i class='fa fa-trash'></i>&nbsp;Hapus</span></td>");
-                                    
+                                    echo '<td><div class="col-lg-12"><center><button type="button" class="btn btn-primary " onclick=location.href="' . $_SERVER['PHP_SELF'] . '?page=view/input_detail&mode=Edit&kode=' . md5($query_data[0]) . '"><i class="fa fa-pencil" ></i> Edit</button><br><br>';
+                                    echo '<button type="button" class="btn btn-primary" onclick=\'if(confirm("Apakah anda yakin akan menghapus data Setting ' . $query_data[1] . ' ?")){location.href="index2.php?page=' . $curPage . '&txtMode=Delete&id=' . md5($query_data[0]) . '"}\' style="cursor:pointer;"><i class="fa fa-trash" ></i> Delete</button></center></div></td>';
                                 } else {
-                                    echo("<td>&nbsp;</td>");
                                     echo("<td>&nbsp;</td>");
                                 }
                                 echo("</tr>");

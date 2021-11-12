@@ -50,6 +50,17 @@
             </nav>
           </div>
           <div class="col-10 col-md-8 d-none d-xl-block" data-aos="fade-down">
+            <center><h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0"><img src="images/logo-qoobah.png" alt="Image" class="img-fluid w20"style="-webkit-filter: none;" height="200" width="200"></a></h1>
+            </center>
+            <div class="row justify-content-center">
+              <div class="col-md-7">
+                <div class="row mb-5">
+                  <div class="col-12 ">
+                    <h2 class="site-section-heading text-center v" style="text-transform:uppercase;color: black">Pulau <?php echo $_GET['island']; ?></h2>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="col-6 col-xl-2 text-right" data-aos="fade-down">
             <div class="d-none d-xl-inline-block">
@@ -73,22 +84,10 @@
           </div>
         </div>
       </div>
-      <center><h1 class="mb-0"><a href="index.php" class="text-white h2 mb-0"><img src="images/logo-qoobah.png" alt="Image" class="img-fluid w20"style="-webkit-filter: none;" height="200" width="200"></a></h1>
-      </center>
-      <div class="row justify-content-center">
-
-        <div class="col-md-7">
-          <div class="row mb-5">
-            <div class="col-12 ">
-              <h2 class="site-section-heading text-center v" style="text-transform:uppercase;color: black">Pulau <?php echo $_GET['island']; ?></h2>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      
     </header>
 
-    <div class="site-section"  data-aos="fade">
+    <div class=""  data-aos="fade">
       <div class="container-fluid">
 
         
@@ -100,9 +99,12 @@
               $q = "SELECT * from gallery WHERE location like '%".$_GET['island']."%'";
               $rs = new MySQLPagedResultSet($q, 30, $dbLink);
               while ($query_data = $rs->fetchArray()) {
-                echo '<div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 item sh" data-aos="fade" data-src="images/admin/uploads/'.$query_data['img'].'" data-sub-html="<h2>'.$query_data['title'].'</h2><p>'.$query_data['caption'].'</p>"><div class="lg-sub-html"><h4>'.$query_data['title'].'</h4></div>
-                <a href="#"><img src="admin/uploads/'.$query_data['img'].'" alt="IMage" class="img-fluid"></a>
-                </div>';
+                if (file_exists('admin/uploads/'.$query_data['img'])) {
+                  echo '<div class="col-lg-4 col-md-12 item" data-aos="fade" data-src="admin/uploads/'.$query_data['img'].'" data-sub-html="<h2>'.$query_data['title'].'</h2><p>'.$query_data['caption'].'</p>" style="padding: 4px;">
+                  <a href="#"><img src="admin/uploads/'.$query_data['img'].'" alt="IMage" class="img-fluid" onerror="this.onerror=null; this.remove();"></a>
+                  </div>';
+
+                }
               }
           ?>
         </div>
@@ -133,16 +135,25 @@
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/swiper.min.js"></script>
   <script src="js/aos.js"></script>
-
   <script src="js/picturefill.min.js"></script>
   <script src="js/lightgallery-all.min.js"></script>
   <script src="js/jquery.mousewheel.min.js"></script>
-
   <script src="js/main.js"></script>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.0/masonry.pkgd.min.js" type="text/javascript"></script>
   <script>
     $(document).ready(function(){
       $('#lightgallery').lightGallery();
+
+      var $container = $('#lightgallery').masonry();
+      $container.imagesLoaded( function() {
+        $container.masonry(
+        { 
+          "columnWidth": ".grid-sizer", 
+          "itemSelector": ".item", 
+          "gutter":10
+        });
+      });
+
     });
   </script>
 
